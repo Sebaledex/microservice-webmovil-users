@@ -64,4 +64,13 @@ export class UserService {
 
     return await user.save();
   }
+
+  async patch(id: string, partialUserDTO: Partial<UserDTO>): Promise<IUser> {
+    const updateData = { ...partialUserDTO };
+    if (partialUserDTO.password) {
+      const hash = await this.hashPassword(partialUserDTO.password);
+      updateData.password = hash;
+    }
+    return await this.model.findByIdAndUpdate(id, updateData,{ new: true });
+  }
 }

@@ -51,5 +51,9 @@ export class UserController {
     const adminDTO = { ...userDTO, roles: ['admin'] };
     return this.userService.create(adminDTO);
   }
+  @MessagePattern(UserMsg.PATCH)
+  patch(payload: { id: string; partialUserDTO: Partial<UserDTO> }) {
+    return this.userService.patch(payload.id, payload.partialUserDTO);
+  }
   
 }
