@@ -50,4 +50,18 @@ export class UserService {
       msg: 'Deleted',
     };
   }
+  async createAdmin(userDTO: UserDTO): Promise<IUser> {
+    const { name, username, email, password, roles } = userDTO;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new this.model({
+      name,
+      username,
+      email,
+      password: hashedPassword,
+      roles: roles || ['admin'], // Asignar rol de admin si no se proporciona
+    });
+
+    return await user.save();
+  }
 }

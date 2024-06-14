@@ -45,4 +45,11 @@ export class UserController {
 
     return null;
   }
+
+  @MessagePattern(UserMsg.CREATE_ADMIN)
+  createAdmin(@Payload() userDTO: UserDTO) {
+    const adminDTO = { ...userDTO, roles: ['admin'] };
+    return this.userService.create(adminDTO);
+  }
+  
 }
