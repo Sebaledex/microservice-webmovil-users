@@ -56,4 +56,9 @@ export class UserController {
     return this.userService.patch(payload.id, payload.partialUserDTO);
   }
   
+  @MessagePattern(UserMsg.CHANGE_ROLE)
+  async changeRole(@Payload() payload: { id: string, isAdmin: boolean }) {
+    return await this.userService.changeRole(payload.id, payload.isAdmin);
+  }
+
 }

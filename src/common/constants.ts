@@ -11,4 +11,6 @@ export enum UserMsg {
   DELETE = 'DELETE_USER',
   VALID_USER = 'VALID_USER',
   PATCH = "PATCH_USER",
+  CHANGE_ROLE = "CHANGE_ROLE",
+  
 }

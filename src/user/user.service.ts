@@ -73,4 +73,11 @@ export class UserService {
     }
     return await this.model.findByIdAndUpdate(id, updateData,{ new: true });
   }
+
+
+  async changeRole(id: string, isAdmin: boolean): Promise<IUser> {
+    const newRole = isAdmin ? 'admin' : 'user';
+    return await this.model.findByIdAndUpdate(id, { roles: [newRole] }, { new: true });
+  }  
+  
 }
